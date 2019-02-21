@@ -23,7 +23,7 @@
  * This could be run in the main loop whilst the application waits for
  * the indexing to finish in a worker thread
  */
-static int index_cb(const git_transfer_progress *stats, void *data)
+static int index_cb(const git_indexer_progress *stats, void *data)
 {
 	(void)data;
 	printf("\rProcessing %d of %d", stats->indexed_objects, stats->total_objects);
@@ -34,7 +34,7 @@ static int index_cb(const git_transfer_progress *stats, void *data)
 int index_pack(git_repository *repo, int argc, char **argv)
 {
 	git_indexer *idx;
-	git_transfer_progress stats = {0, 0};
+	git_indexer_progress stats = {0, 0};
 	int error;
 	char hash[GIT_OID_HEXSZ + 1] = {0};
 	int fd;
